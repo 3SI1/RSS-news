@@ -25,7 +25,7 @@ const loadNewsFromXML = (rootEl, url_news = []) =>
         })
         .then((xml) => {
           let newsEL = ``;
-          let items = document.evaluate("/rss/channel/item", xml, null, XPathResult.ANY_TYPE, null);
+          let items = xml.evaluate("/rss/channel/item", xml, null, XPathResult.ANY_TYPE, null);
           var item = items.iterateNext();
           while (item) {
             title = item.querySelector("title").textContent;
