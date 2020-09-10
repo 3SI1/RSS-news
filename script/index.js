@@ -7,7 +7,7 @@ const newsItem = (title, description, link) => `
   </div>
 `;
 
-const loadNews = (rootEl, url_news = []) =>
+const loadNewsFromXML = (rootEl, url_news = []) =>
   Promise.all(
     url_news.map((url) => {
       fetch(url)
@@ -35,12 +35,37 @@ const loadNews = (rootEl, url_news = []) =>
     )
   );
 
+const loadNewsFromJSON = (rootEl,url_news = []) => 
+  Promise.all(
+    url_news.map((url) => {
+      fetch(url)
+        .then((res) => res.text())
+        .then((text) => xmlToJson(text))
+        .then((json) => JSON.parse(json))
+        .then((data) => {
+          let newsEL = ``;
+          let items = data.rss.channel.item
+          items.map((item)=>{
+            title = item.title["#cdata-section"]
+            link = item.link
+            description = item.description["#cdata-section"]
+            
+            newsEL += newsItem(title,description,link)
+          })
+          return newsEL
+        })
+        .then(allNews => rootEl.innerHTML += allNews)
+      }
+    )
+  )
+
 const NEWS_URL = [
+  "https://rss.detik.com/index.php/detikcom_nasional",
   "https://www.cnnindonesia.com/nasional/rss",
   "https://www.vice.com/id_id/rss",
-  "https://rss.detik.com/index.php/detikcom_nasional",
-  "https://www.antaranews.com/rss/top-news"
 ];
 
-loadNews(document.getElementById("root"), NEWS_URL)
+// loadNewsFromXML(document.getElementById("root"), NEWS_URL)
 
+
+loadNewsFromJSON(document.getElementById("root"), NEWS_URL)
