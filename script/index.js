@@ -1,3 +1,7 @@
+// Author Jafar Husaini Aziz
+// feel free to copy
+// full project on https://github.com/jfrAziz/RSS-news
+
 const $ = (el) => document.getElementById(el)
 
 const newsItem = (title, description, link) => `
