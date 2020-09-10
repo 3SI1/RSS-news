@@ -61,4 +61,7 @@ body {
   #root {
     grid-template-columns: repeat(1, minmax(200px, 1fr));
   }
+  .news-item:hover {
+    transform: translateY(0);
+  }
 }

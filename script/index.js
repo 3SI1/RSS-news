@@ -38,7 +38,7 @@ const loadNews = (rootEl, url_news = []) =>
 const NEWS_URL = [
   "https://www.cnnindonesia.com/nasional/rss",
   "https://www.vice.com/id_id/rss",
-  "http://rss.detik.com/index.php/detikcom_nasional",
+  "https://rss.detik.com/index.php/detikcom_nasional",
   "https://www.antaranews.com/rss/top-news"
 ];
 
