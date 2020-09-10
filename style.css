@@ -2,6 +2,37 @@ body {
   margin: 0;
   padding: 0;
   background-color: #ebebeb;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+#info {
+  text-align: center;
+  margin: 20px 20px 10px;
+}
+
+.btn {
+  display: flex;
+  margin: 10px auto;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #38a3c4;
+  color: #fff;
+  transition: all 300ms ease;
+}
+
+.btn:hover {
+  background-color: #328fac;
+}
+
+.btn.active {
+  display: none;
+}
+
+.info:not(.active) {
+  display: none;
 }
 
 #root {
@@ -18,7 +49,6 @@ body {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
-  font-family: "Nunito Sans", sans-serif;
   box-shadow: 2px 3px 4px rgba(51, 51, 51, 0.116);
   transition: all 300ms ease;
 }
@@ -49,7 +79,6 @@ body {
   color: #666;
   font-size: 0.9rem;
 }
-
 
 @media only screen and (max-width:900px){
   #root {

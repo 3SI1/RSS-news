@@ -1,3 +1,5 @@
+const $ = (el) => document.getElementById(el)
+
 const newsItem = (title, description, link) => `
   <div class="news-item">
     <a href="${link}">
@@ -62,10 +64,26 @@ const loadNewsFromJSON = (rootEl,url_news = []) =>
 const NEWS_URL = [
   "https://rss.detik.com/index.php/detikcom_nasional",
   "https://www.cnnindonesia.com/nasional/rss",
-  "https://www.vice.com/id_id/rss",
+  "https://www.vice.com/id_id/rss"
 ];
 
-// loadNewsFromXML(document.getElementById("root"), NEWS_URL)
 
+const toggleXMLorJSON = () => {
+  $("json-btn").classList.toggle("active")
+  $("json-info").classList.toggle("active")
+  $("xml-btn").classList.toggle("active")
+  $("xml-info").classList.toggle("active")
+  $("root").innerHTML = ""
+}
 
-loadNewsFromJSON(document.getElementById("root"), NEWS_URL)
+$("json-btn").addEventListener("click", ()=>{
+  toggleXMLorJSON()
+  loadNewsFromJSON($("root"), NEWS_URL)
+})
+
+$("xml-btn").addEventListener("click", ()=>{
+  toggleXMLorJSON()
+  loadNewsFromXML($("root"), NEWS_URL)
+})
+
+loadNewsFromXML($("root"), NEWS_URL)
