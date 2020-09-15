@@ -2,8 +2,14 @@
 // feel free to copy
 // full project on https://github.com/jfrAziz/RSS-news
 
+//fungsi untuk memudahkan dalam memanggil
+//element dengan id nya.
 const $ = (el) => document.getElementById(el)
 
+
+//Fungsi ini untuk membuat sebuah element
+//yang akan digunakan untuk setiap item 
+//berita yang diambil dari rss berita
 const newsItem = (title, description, link) => `
   <div class="news-item">
     <a href="${link}">
@@ -13,6 +19,15 @@ const newsItem = (title, description, link) => `
   </div>
 `;
 
+
+//Untuk mengambil data dari RSS berita
+//digunakan promise fetch kemudian diteruskan dengan
+//mem-parsing hasinya ke xml. Setelah diparsing ke XML
+//dilakukan query menggunakan XPATH untuk mengambil 
+//semua data item berita. Dari semua item berita yang diperoleh
+//dikonversi menjadi element berita menggunakan fungsi yang
+//sudah dibuat sebelumnya. Lalu element-element berita tersebut
+//dimasukkan ke sebuah element dari root beritanya
 const loadNewsFromXML = (rootEl, url_news = []) =>
   Promise.all(
     url_news.map((url) => {
@@ -41,6 +56,16 @@ const loadNewsFromXML = (rootEl, url_news = []) =>
     )
   );
 
+
+//Untuk mengambil data dari RSS berita
+//digunakan promise fetch kemudian diteruskan dengan
+//mem-parsing hasinya ke JSON menggunakan xmlToJson dari https://github.com/javadev/xml-to-json
+//kemudian dipilih semua atribut item (atribut item berita) 
+//dari rss yang sudah ditransformasi menjadi json 
+//Dari semua item berita yang diperoleh
+//dikonversi menjadi element berita menggunakan fungsi yang
+//sudah dibuat sebelumnya. Lalu element-element berita tersebut
+//di masukkan ke sebuah element dari root beritanya
 const loadNewsFromJSON = (rootEl,url_news = []) => 
   Promise.all(
     url_news.map((url) => {
@@ -71,6 +96,9 @@ const NEWS_URL = [
   "https://www.vice.com/id_id/rss"
 ];
 
+
+//Manipulasi DOM untuk membuat tombol yang dapat 
+//merubah sumber data langsung dari JSON ke XML dan sebaliknya
 
 const toggleXMLorJSON = () => {
   $("json-btn").classList.toggle("active")
